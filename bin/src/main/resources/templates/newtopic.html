@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Create New Topic</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/cosmo/bootstrap.min.css" />
+  <script src= "https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" ></script>
+</head>
+<body>
+<div th:replace="fragments/topnav :: navbar"></div>
+<div align="center">
+  <h1>Create New Topic</h1>
+  <br />
+  <div class="col-sm-4">
+    <form action="#" th:action="@{/topic/savetopic}" th:object="${topic}" method="post">
+
+
+      <div align="left">
+        <tr>
+
+          <td>
+            <input type="hidden" th:field="*{creationDate}" />
+            <input type="hidden" th:field="*{userId}"/>
+            <input type="hidden" th:field="*{topicId}" />
+<!--            <input type="text" th:field="*{subject}" class="form-control"  />-->
+          </td>
+        </tr>
+
+
+      </div>
+      <div class="col-md-12">
+        <!--                        <section class="panel  timeline-post-to">-->
+        <!--                            <div class="panel-body">-->
+        <form role="form">
+          <textarea  th:field="*{subject}" class="form-control rounded" placeholder="Create your topic" />
+          <div class="row">
+
+            <div class="col-sm-12 text-right">
+              <button type="submit" class="btn btn-primary rounded mt-3">Create</button>
+            </div>
+          </div>
+        </form>
+        <!--                            </div>-->
+        <!--                        </section>-->
+<!--      </div>-->
+
+      </div>
+
+      <br>
+<!--      <tr>-->
+<!--        <td colspan="2"><button type="submit" class="btn btn-info">Save</button> </td>-->
+<!--      </tr>-->
+
+    </form>
+  </div>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>
+
+
+

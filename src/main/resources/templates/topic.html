@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<!--/* Workaround for bug https://youtrack.jetbrains.com/issue/IDEA-132738 -->
+<!--@thymesVar id="topic" type="prog3fp.llom.forum.Domain.Topic"-->
+<!--@thymesVar id="post" type="prog3fp.llom.forum.Domain.Post"-->
+<!--@thymesVar id="postList" type="List<Post>"-->
+<!--*/-->
+<head>
+    <meta charset="UTF-8">
+    <title>Topic</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/cosmo/bootstrap.min.css" />
+    <script src= "https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" ></script>
+</head>
+<body>
+<div th:replace="fragments/topnav :: navbar"></div>
+
+<div class="p-5 text-center bg-light" >
+    <h2 th:text="${topic.subject}" class="mb-3">Topic subject</h2>
+
+    <!--        <a class="btn btn-primary" th:href="@{'/topic/newtopic'}" role="button" >Add new Topic</a>-->
+
+    <div sec:authorize="hasAuthority('ROLE_USER')">
+        <a class="btn btn-primary rounded" th:object="${topic}" th:href="@{'/post/newpost/'+ ${topic.topicId} + '/' + ${#authentication.getPrincipal().getUserId()}}" role="button">Add a post</a>
+    </div>
+
+<!--    <h3><a class="btn btn-primary rounded" sec:authorize="hasAuthority('ROLE_USER')" th:href="@{'/topic/newtopic/' + ${#authentication.getPrincipal().getUserId()}}"  role="button">Add new Topic</a></h3>-->
+
+</div>
+
+
+
+<!--<h2 th:text="${topic.subject}">Topic subject</h2>-->
+
+<!--<form action="#" th:action="@{/}" th:object="${topic}" method="post">-->
+
+<!--    <div sec:authorize="hasAuthority('ROLE_USER')">-->
+<!--        <a th:object="${topic}" th:href="@{'/post/newpost/'+ ${topic.topicId} + '/' + ${#authentication.getPrincipal().getUserId()}}">Add a post</a>-->
+<!--    </div>-->
+
+<!--</form>-->
+
+    <tr>
+        <div class="col-md-10 mx-auto align-center align-items-center" >
+            <div class="panel-body mx-5 align-center" >
+
+
+                <table class="table bg-white">
+                    <thead class="thead-light">
+                <thead class="thead-light">
+                <tr>
+                    <th>Post</th>
+                    <th>Creation Date</th>
+                    <th>Author</th>
+                    <th sec:authorize="hasAuthority('ROLE_USER')">edit</th>
+                    <th sec:authorize="hasAuthority('ROLE_USER')">delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr  th:each="post : ${topic.postList}">
+                    <td class="text-wrap overflow-hidden " th:text="${post.text}" >Text</td>
+                    <td th:text="${post.creationDate}">Creation Date</td>
+                    <td th:text="${post.user.username}">creatorId</td>
+                    <td sec:authorize="hasAuthority('ROLE_USER')" th:if="${#authentication.getPrincipal().getUsername() == post.user.username}"><a th:href="@{'/post/editpost/' + ${post.postId}}">Edit</a></td>
+                    <td sec:authorize="hasAuthority('ROLE_USER')" th:if="${#authentication.getPrincipal().getUsername() == post.user.username}"><a th:href="@{'/post/deletepost/' + ${post.postId}}">Delete</a></td>
+                </tr>
+
+
+
+
+                </tbody>
+            </table>
+
+
+        </div>
+
+    </div>
+
+</tr>
+
+</tbody>
+</table>
+
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>
+
+
+

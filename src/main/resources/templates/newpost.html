@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<!--/* Workaround for bug https://youtrack.jetbrains.com/issue/IDEA-132738 -->
+<!--@thymesVar id="post" type="prog3fp.llom.forum.Domain.Post"-->
+<!--@thymesVar id="user" type="prog3fp.llom.forum.Domain.User"-->
+<!--@thymesVar id="topicId" type="Long"-->
+<!--@thymesVar id="postId" type="Long"-->
+<!--@thymesVar id="userId" type="Long"-->
+<!--@thymesVar id="creationDate" type="String"-->
+<!--@thymesVar id="text" type="String"-->
+<!--*/-->
+<head>
+    <meta charset="UTF-8">
+    <title>Create New Post</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/cosmo/bootstrap.min.css" />
+    <script src= "https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" ></script>
+</head>
+<body>
+<div th:replace="fragments/topnav :: navbar"></div>
+<div align="center">
+    <h1>Create New Post</h1>
+    <br />
+    <div class="col-md-5">
+        <form action="#" th:action="@{/post/savepost}" th:object="${post}" method="post">
+
+
+            <div align="left">
+                <tr>
+<!--                    <label class="form-label" >Text</label>-->
+                    <td>
+                        <input type="hidden" th:field="*{creationDate}"/>
+                        <input type="hidden" th:field="*{topicId}"/></td>
+                        <input type="hidden" th:field="*{user.userId}"/>
+                        <input type="hidden" th:field="*{postId}" />
+<!--                        <textarea  th:field="*{text}" class="form-control" placeholder="Add your post." />-->
+                    </td>
+                </tr>
+            </div>
+                    <div class="col-md-12">
+<!--                        <section class="panel  timeline-post-to">-->
+<!--                            <div class="panel-body">-->
+                                <form role="form">
+                                    <textarea  th:field="*{text}" class="form-control rounded" placeholder="Add your post." />
+                                    <div class="row">
+
+                                        <div class="col-sm-12 text-right">
+                                            <button type="submit" class="btn btn-primary rounded mt-3">Post</button>
+                                        </div>
+                                    </div>
+                                </form>
+<!--                            </div>-->
+<!--                        </section>-->
+                    </div>
+
+
+
+
+<!--            <tr>-->
+<!--                <div class="col-sm-6 text-right">-->
+<!--                      <button type="submit" class="btn btn-primary">Post</button>-->
+<!--                </div>-->
+
+<!--                                    <td colspan="2"><button type="submit" class="btn btn-info">Save</button> </td>-->
+<!--                                </tr>-->
+
+                            </form>
+                        </div>
+                    </div>
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>
+
+
+
